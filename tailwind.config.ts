@@ -25,6 +25,9 @@ const config: Config = {
         black_primary: '#000112',
         medium_grey: '#828FA3',
       },
+      borderColor: {
+        lines_light: '#E4EBFA',
+      },
     },
   },
   plugins: [],
