@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '../atoms/Button';
+import SectionHeading from '../atoms/SectionHeading';
 
 type BoardListProps = {
   boardData: {
@@ -50,21 +51,31 @@ const BoardList = ({
   setCurrentBoard,
 }: BoardListProps) => {
   return (
-    <ul className="flex flex-col pr-4">
-      {boardData.map((board, idx) => (
-        <li
-          key={idx}
-          onClick={() => setCurrentBoard(board)}
-          className={
-            currentBoard.name == board.name
-              ? 'bg-purple_primary pl-6 pr-16 py-2 w-full rounded-r-full'
-              : 'pl-6 pr-16 py-2 w-full rounded-r-full'
-          }
-        >
-          <Button buttonType="primary" text={board.name} />
+    <div>
+      <SectionHeading
+        name={'All Boards'}
+        count={boardData.length}
+        classes="pl-8"
+      />
+      <ul className="flex flex-col pr-6">
+        {boardData.map((board, idx) => (
+          <li
+            key={idx}
+            onClick={() => setCurrentBoard(board)}
+            className={`${
+              currentBoard.name == board.name
+                ? 'bg-button-primary text-typography-white'
+                : 'text-typography-grey'
+            } pl-6 py-4 w-full rounded-r-full`}
+          >
+            <Button buttonType="primary" text={board.name} />
+          </li>
+        ))}
+        <li>
+          <Button buttonType="create" text="+ Create New Board" />
         </li>
-      ))}
-    </ul>
+      </ul>
+    </div>
   );
 };
 

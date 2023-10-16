@@ -11,7 +11,11 @@ export default function Home() {
   const [currentBoard, setCurrentBoard] = useState(boardData.boards[0]);
   return (
     <main className="flex min-h-screen flex-col items-center">
-      <Navbar setSidebarActive={setSidebarActive} />
+      <Navbar
+        sidebarActive={sidebarActive}
+        setSidebarActive={setSidebarActive}
+        currentBoard={currentBoard.name}
+      />
       <div className="flex w-full flex-1">
         {sidebarActive ? (
           <SideBar

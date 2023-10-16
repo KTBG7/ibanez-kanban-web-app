@@ -3,6 +3,7 @@ import Image from 'next/image';
 import light_logo from '@/public/assets/logo-light.svg';
 import BoardList from '../molecules/BoardList';
 import Button from '../atoms/Button';
+import Heading from '../atoms/SectionHeading';
 
 type SideBarProps = {
   boardData: {
@@ -53,7 +54,7 @@ const SideBar = ({
   setCurrentBoard,
 }: SideBarProps) => {
   return (
-    <div className="flex flex-col w-96 justify-between border-r-2 border-r-lines_light">
+    <div className="flex flex-col justify-between w-96 border-r-2 border-r-lines_light">
       <BoardList
         boardData={boardData}
         currentBoard={currentBoard}
