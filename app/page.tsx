@@ -9,11 +9,14 @@ export default function Home() {
   const [sidebarActive, setSidebarActive] = useState(false);
   const boardData = data;
   const [currentBoard, setCurrentBoard] = useState(boardData.boards[0]);
+  const toggleSidebar = () => {
+    setSidebarActive((prev) => !!!prev);
+  };
   return (
     <main className="flex min-h-screen flex-col items-center">
       <Navbar
         sidebarActive={sidebarActive}
-        setSidebarActive={setSidebarActive}
+        toggleSidebar={toggleSidebar}
         currentBoard={currentBoard.name}
       />
       <div className="flex w-full flex-1">

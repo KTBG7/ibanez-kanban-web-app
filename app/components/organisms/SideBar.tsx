@@ -4,6 +4,8 @@ import light_logo from '@/public/assets/logo-light.svg';
 import BoardList from '../molecules/BoardList';
 import Button from '../atoms/Button';
 import Heading from '../atoms/SectionHeading';
+import DarkModeSwitch from '../molecules/DarkModeSwitch';
+import hide_eye_icon from '@/public/assets/icon-hide-sidebar.svg';
 
 type SideBarProps = {
   boardData: {
@@ -54,15 +56,22 @@ const SideBar = ({
   setCurrentBoard,
 }: SideBarProps) => {
   return (
-    <div className="flex flex-col justify-between w-96 border-r-2 border-r-lines_light">
+    <div className="flex flex-col justify-between w-96 bg-white dark:bg-dark_grey_secondary border-r-2 border-r-lines_light dark:border-r-lines-dark">
       <BoardList
         boardData={boardData}
         currentBoard={currentBoard}
         setCurrentBoard={setCurrentBoard}
       />
-      <div>
-        <h1>Darkmode</h1>
-        <h4>HIde</h4>
+      <div className="flex flex-col justify-center px-6 gap-6">
+        <DarkModeSwitch />
+        <a className="flex w-full items-center pb-12">
+          <Image
+            className="mr-4"
+            src={hide_eye_icon}
+            alt="Eye to hide sidebar"
+          />{' '}
+          Hide Sidebar
+        </a>
       </div>
     </div>
   );

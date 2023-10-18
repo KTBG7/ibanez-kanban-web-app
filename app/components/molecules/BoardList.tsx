@@ -55,7 +55,7 @@ const BoardList = ({
       <SectionHeading
         name={'All Boards'}
         count={boardData.length}
-        classes="pl-8"
+        classes="pl-8 pb-5"
       />
       <ul className="flex flex-col pr-6">
         {boardData.map((board, idx) => (
@@ -65,13 +65,13 @@ const BoardList = ({
             className={`${
               currentBoard.name == board.name
                 ? 'bg-button-primary text-typography-white'
-                : 'text-typography-grey'
-            } pl-6 py-4 w-full rounded-r-full`}
+                : 'hover:bg-button-secondary_light dark:hover:bg-button-secondary_dark text-typography-grey hover:text-button-primary'
+            } pl-6 py-4 w-full rounded-r-full hover:cursor-pointer`}
           >
             <Button buttonType="primary" text={board.name} />
           </li>
         ))}
-        <li>
+        <li className="pl-6 py-4 w-full rounded-r-full text-typography-purple hover:bg-button-secondary_light dark:hover:bg-button-secondary_dark hover:cursor-pointer">
           <Button buttonType="create" text="+ Create New Board" />
         </li>
       </ul>

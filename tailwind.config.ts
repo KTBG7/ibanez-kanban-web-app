@@ -6,6 +6,7 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       fontSize: {
@@ -44,20 +45,13 @@ const config: Config = {
           grey: '#828FA3',
           white: '#FFFFFF',
           destructive: '#EA5555',
+          purple: '#635FC7',
         },
         black_primary: '#000112',
         dark_grey_primary: '#20212C',
         dark_grey_secondary: '#2B2C37',
         lines: { light: '#E4EBFA', dark: '#3E3F4E' },
-        medium_grey: '#828FA3',
-        light_grey: '#F4F7FD',
-      },
-      textColor: {
-        black_primary: '#000112',
-        medium_grey: '#828FA3',
-      },
-      borderColor: {
-        lines_light: '#E4EBFA',
+        background: { light: '#F4F7FD', dark: '#20212C' },
       },
     },
   },

@@ -11,8 +11,10 @@ const Logo = ({ toggleSidebar, sidebarActive }: LogoProps) => {
     <div
       onClick={toggleSidebar}
       className={`${
-        sidebarActive ? 'w-96' : 'w-52 border-b-2 border-b-lines_light'
-      } h-full pl-8 flex items-center border-r-2 border-r-lines_light`}
+        sidebarActive
+          ? 'w-96'
+          : 'w-52 border-b-2 border-b-lines_light dark:border-b-lines-dark dark:border-r-lines-dark'
+      } h-full pl-8 flex items-center border-r-2 border-r-lines_light dark:border-r-lines-dark`}
     >
       <Image priority src={light_logo} alt="Kanban logo" className="pr-1" />
     </div>

@@ -1,12 +1,18 @@
 import React from 'react';
 
 type ButtonProps = {
-  text: String;
-  buttonType: String;
-  className?: String;
+  text: string;
+  buttonType: string;
+  className?: string;
+  onClick: () => void;
 };
 
-const Button = ({ text, buttonType, className = 'flex-1' }: ButtonProps) => {
+const Button = ({
+  text,
+  buttonType,
+  className = 'flex-1',
+  onClick,
+}: ButtonProps) => {
   let classes;
   switch (buttonType) {
     case 'primary':
@@ -17,7 +23,11 @@ const Button = ({ text, buttonType, className = 'flex-1' }: ButtonProps) => {
     default:
       break;
   }
-  return <button className={`${className}`}>{text}</button>;
+  return (
+    <button onClick={onClick} className={`${className}`}>
+      {text}
+    </button>
+  );
 };
 
 export default Button;
