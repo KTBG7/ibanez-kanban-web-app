@@ -14,8 +14,11 @@ const Navbar = ({
   currentBoard,
 }: NavbarProps) => {
   const [showModal, setShowModal] = useState(false);
-  const toggleModal = () => {
+  const openModal = () => {
     setShowModal(true);
+  };
+  const closeModal = () => {
+    setShowModal(false);
   };
   return (
     <nav className="flex w-full h-24 items-center bg-white dark:bg-dark_grey_secondary">
@@ -26,9 +29,11 @@ const Navbar = ({
           text="+ Add New Task"
           buttonType="primary"
           className="px-5 py-3"
-          onClick={toggleModal}
+          onClick={openModal}
         />
-        <Modal isOpen={showModal} onClose={produc}></Modal>
+        <Modal isOpen={showModal} onClose={closeModal}>
+          \
+        </Modal>
       </div>
     </nav>
   );

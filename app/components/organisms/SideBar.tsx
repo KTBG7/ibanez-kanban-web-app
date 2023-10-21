@@ -56,15 +56,15 @@ const SideBar = ({
   setCurrentBoard,
 }: SideBarProps) => {
   return (
-    <div className="flex flex-col justify-between w-96 bg-white dark:bg-dark_grey_secondary border-r-2 border-r-lines_light dark:border-r-lines-dark">
+    <div className="flex flex-col justify-between flex-shrink-0  w-96 bg-white dark:bg-dark_grey_secondary border-r-2 border-r-lines_light dark:border-r-lines-dark">
       <BoardList
         boardData={boardData}
         currentBoard={currentBoard}
         setCurrentBoard={setCurrentBoard}
       />
-      <div className="flex flex-col justify-center px-6 gap-6">
+      <div className="">
         <DarkModeSwitch />
-        <a className="flex w-full items-center pb-12">
+        <a className="flex w-full items-center">
           <Image
             className="mr-4"
             src={hide_eye_icon}

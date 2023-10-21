@@ -8,7 +8,7 @@ type SectionHeadingProps = {
 const SectionHeading = ({ name, count, classes }: SectionHeadingProps) => {
   return (
     <h3
-      className={`${classes} text-typography-grey text-heading_S`}
+      className={`${classes}  text-heading_S text-typography-grey`}
     >{`${name} (${count})`}</h3>
   );
 };

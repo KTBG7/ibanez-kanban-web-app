@@ -13,13 +13,13 @@ export default function Home() {
     setSidebarActive((prev) => !!!prev);
   };
   return (
-    <main className="flex min-h-screen flex-col items-center">
+    <main className="flex min-h-screen flex-col items-center overflow-x-hidden">
       <Navbar
         sidebarActive={sidebarActive}
         toggleSidebar={toggleSidebar}
         currentBoard={currentBoard.name}
       />
-      <div className="flex w-full flex-1">
+      <div className="flex w-full h-full flex-1">
         {sidebarActive ? (
           <SideBar
             boardData={boardData.boards}
@@ -27,7 +27,11 @@ export default function Home() {
             setCurrentBoard={setCurrentBoard}
           />
         ) : null}
-        <Board currentBoard={currentBoard} />
+        <Board
+          currentBoard={currentBoard}
+          sidebarActive={sidebarActive}
+          toggleSidebar={toggleSidebar}
+        />
       </div>
     </main>
   );

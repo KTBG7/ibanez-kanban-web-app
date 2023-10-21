@@ -24,7 +24,7 @@ const Button = ({
       break;
   }
   return (
-    <button onClick={onClick} className={`${className}`}>
+    <button onClick={onClick} className={`${className} ${classes}`}>
       {text}
     </button>
   );
