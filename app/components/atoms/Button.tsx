@@ -1,16 +1,16 @@
 import React from 'react';
 
 type ButtonProps = {
-  text: string;
+  children: React.ReactNode;
   buttonType: string;
   className?: string;
   onClick: () => void;
 };
 
 const Button = ({
-  text,
+  children,
   buttonType,
-  className = 'flex-1',
+  className = '',
   onClick,
 }: ButtonProps) => {
   let classes;
@@ -25,7 +25,7 @@ const Button = ({
   }
   return (
     <button onClick={onClick} className={`${className} ${classes}`}>
-      {text}
+      {children}
     </button>
   );
 };
