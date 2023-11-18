@@ -54,7 +54,7 @@ const BoardList = ({
   setCurrentBoard,
 }: BoardListProps) => {
   return (
-    <div>
+    <div className="pt-4">
       <SectionHeading
         name={'All Boards'}
         count={boardData.length}

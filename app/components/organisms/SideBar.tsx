@@ -1,13 +1,13 @@
 import React from 'react';
 import Image from 'next/image';
-import light_logo from '@/public/assets/logo-light.svg';
 import BoardList from '../molecules/BoardList';
-import Button from '../atoms/Button';
-import Heading from '../atoms/SectionHeading';
 import DarkModeSwitch from '../molecules/DarkModeSwitch';
 import hide_eye_icon from '@/public/assets/icon-hide-sidebar.svg';
+import Logo from '../atoms/Logo';
 
 type SideBarProps = {
+  toggleSidebar: () => void;
+  sidebarActive: boolean;
   boardData: {
     name: string;
     columns: {
@@ -49,30 +49,60 @@ type SideBarProps = {
       }[];
     }>
   >;
+  theme: string;
+  setTheme: React.Dispatch<React.SetStateAction<string>>;
 };
 const SideBar = ({
+  toggleSidebar,
+  sidebarActive,
   boardData,
   currentBoard,
   setCurrentBoard,
+  theme,
+  setTheme,
 }: SideBarProps) => {
   return (
-    <div className="flex flex-col justify-between flex-shrink-0  w-96 bg-white dark:bg-dark_grey_secondary border-r-2 border-r-lines_light dark:border-r-lines-dark">
-      <BoardList
-        boardData={boardData}
-        currentBoard={currentBoard}
-        setCurrentBoard={setCurrentBoard}
-      />
-      <div className="">
-        <DarkModeSwitch />
-        <a className="flex w-full items-center">
-          <Image
-            className="mr-4"
-            src={hide_eye_icon}
-            alt="Eye to hide sidebar"
-          />{' '}
-          Hide Sidebar
-        </a>
+    <div
+      className={`${
+        sidebarActive
+          ? 'absolute md:flex flex-col justify-between top-0 md:w-64 xl:w-80 min-h-screen '
+          : 'md:w-50 xl:w-52 h-full'
+      } max-md:hidden z-50 bg-white dark:bg-dark_grey_secondary border-r-2 border-r-lines_light dark:border-r-lines-dark`}
+    >
+      <div>
+        <div
+          onClick={toggleSidebar}
+          className={`md:pl-6 md:pr-6  xl:pl-8 xl:pr-8 h-16 md:h-20 xl:h-24 flex items-center`}
+        >
+          <Logo theme={theme} />
+        </div>
+        {sidebarActive ? (
+          <>
+            <BoardList
+              boardData={boardData}
+              currentBoard={currentBoard}
+              setCurrentBoard={setCurrentBoard}
+            />
+          </>
+        ) : (
+          ''
+        )}
       </div>
+      {sidebarActive ? (
+        <div>
+          <DarkModeSwitch setTheme={setTheme} />
+          <a onClick={toggleSidebar} className="flex w-full items-center">
+            <Image
+              className="mr-4"
+              src={hide_eye_icon}
+              alt="Eye to hide sidebar"
+            />{' '}
+            Hide Sidebar
+          </a>
+        </div>
+      ) : (
+        ''
+      )}
     </div>
   );
 };

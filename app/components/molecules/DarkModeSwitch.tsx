@@ -1,25 +1,32 @@
 import Image from 'next/image';
-import React from 'react';
+import React, { useContext } from 'react';
 import sun from '@/public/assets/icon-light-theme.svg';
 import moon from '@/public/assets/icon-dark-theme.svg';
 
-const DarkModeSwitch = () => {
+type DarkModeSwitchProps = {
+  setTheme: React.Dispatch<React.SetStateAction<string>>;
+};
+const DarkModeSwitch = ({ setTheme }: DarkModeSwitchProps) => {
   const toggleDarkMode = () => {
     if (localStorage.getItem('color-theme')) {
       if (localStorage.getItem('color-theme') === 'light') {
         document.documentElement.classList.add('dark');
         localStorage.setItem('color-theme', 'dark');
+        setTheme('dark');
       } else {
         document.documentElement.classList.remove('dark');
         localStorage.setItem('color-theme', 'light');
+        setTheme('light');
       }
     } else {
       if (document.documentElement.classList.contains('dark')) {
         document.documentElement.classList.remove('dark');
         localStorage.setItem('color-theme', 'light');
+        setTheme('light');
       } else {
         document.documentElement.classList.add('dark');
         localStorage.setItem('color-theme', 'dark');
+        setTheme('dark');
       }
     }
   };

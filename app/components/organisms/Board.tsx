@@ -21,7 +21,7 @@ type BoardProps = {
 };
 const Board = ({ currentBoard, sidebarActive, toggleSidebar }: BoardProps) => {
   return (
-    <div className="flex overflow-x-scroll gap-4 bg-background-light dark:bg-background-dark">
+    <div className="relative pt-16 md:pt-20 xl:pt-24 flex w-full flex-shrink-0 overflow-auto gap-4 bg-background-light dark:bg-background-dark">
       {!sidebarActive ? (
         <a
           onClick={toggleSidebar}

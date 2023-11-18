@@ -22,6 +22,11 @@ const Modal = ({ isOpen, button, onSubmit, onClose, children }: ModalProps) => {
     }
   };
 
+  const handleOutsideClickClose = () => {
+    setIsModalOpen(false);
+    onClose();
+  };
+
   useEffect(() => {
     setIsModalOpen(isOpen);
   }, [isOpen]);
@@ -37,7 +42,12 @@ const Modal = ({ isOpen, button, onSubmit, onClose, children }: ModalProps) => {
     }
   }, [isModalOpen]);
   return (
-    <dialog ref={modalRef} onKeyDown={(e) => handleKeyboardClose(e)}>
+    <dialog
+      ref={modalRef}
+      onClick={handleOutsideClickClose}
+      onMouseOut={() => setIsModalOpen(false)}
+      onKeyDown={(e) => handleKeyboardClose(e)}
+    >
       {children}
       {button && onSubmit ? (
         <Button
