@@ -40,11 +40,11 @@ const ColumnModal = ({
       submitLabel={submitLabel}
       submitType={submitType}
     >
-      <div className="flex w-full items-center justify-between">
+      <div className="flex w-full items-center justify-between px-6 md:px-8">
         <h2 className="text-typography-black dark:text-typography-white text-heading_L">
           Add New Column
         </h2>
-        <a onClick={() => onClose()}>
+        <a className="hover:cursor-pointer" onClick={() => onClose()}>
           <Image src={cross_icon} alt="Cross Icon" height={20} width={20} />
         </a>
       </div>
