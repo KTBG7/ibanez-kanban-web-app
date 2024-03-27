@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { ReactNode } from "react";
 
 type ButtonProps = {
-  children: React.ReactNode;
+  children: ReactNode;
   buttonType: string;
   className?: string;
   onClick: () => void;
@@ -10,14 +10,22 @@ type ButtonProps = {
 const Button = ({
   children,
   buttonType,
-  className = '',
+  className = "",
   onClick,
 }: ButtonProps) => {
   let classes;
   switch (buttonType) {
-    case 'primary':
+    case "primary":
       classes =
-        'rounded-3xl bg-button-primary hover:bg-button-primary_hover text-white';
+        "rounded-3xl bg-button-primary hover:bg-button-primary_hover text-white";
+      break;
+    case "secondary":
+      classes =
+        "rounded-3xl bg-button-secondary_light hover:bg-button-secondary_light_hover text-button-secondary_text dark:bg-white";
+      break;
+    case "delete":
+      classes =
+        "rounded-3xl bg-button-destructive hover:bg-button-destructive_hover text-white";
       break;
 
     default:

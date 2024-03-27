@@ -1,39 +1,39 @@
-import Image from 'next/image';
-import React, { useContext } from 'react';
-import sun from '@/public/assets/icon-light-theme.svg';
-import moon from '@/public/assets/icon-dark-theme.svg';
+import Image from "next/image";
+import React, { useContext } from "react";
+import sun from "@/public/assets/icon-light-theme.svg";
+import moon from "@/public/assets/icon-dark-theme.svg";
 
 type DarkModeSwitchProps = {
   setTheme: React.Dispatch<React.SetStateAction<string>>;
 };
 const DarkModeSwitch = ({ setTheme }: DarkModeSwitchProps) => {
   const toggleDarkMode = () => {
-    if (localStorage.getItem('color-theme')) {
-      if (localStorage.getItem('color-theme') === 'light') {
-        document.documentElement.classList.add('dark');
-        localStorage.setItem('color-theme', 'dark');
-        setTheme('dark');
+    if (localStorage.getItem("color-theme")) {
+      if (localStorage.getItem("color-theme") === "light") {
+        document.documentElement.classList.add("dark");
+        localStorage.setItem("color-theme", "dark");
+        setTheme("dark");
       } else {
-        document.documentElement.classList.remove('dark');
-        localStorage.setItem('color-theme', 'light');
-        setTheme('light');
+        document.documentElement.classList.remove("dark");
+        localStorage.setItem("color-theme", "light");
+        setTheme("light");
       }
     } else {
-      if (document.documentElement.classList.contains('dark')) {
-        document.documentElement.classList.remove('dark');
-        localStorage.setItem('color-theme', 'light');
-        setTheme('light');
+      if (document.documentElement.classList.contains("dark")) {
+        document.documentElement.classList.remove("dark");
+        localStorage.setItem("color-theme", "light");
+        setTheme("light");
       } else {
-        document.documentElement.classList.add('dark');
-        localStorage.setItem('color-theme', 'dark');
-        setTheme('dark');
+        document.documentElement.classList.add("dark");
+        localStorage.setItem("color-theme", "dark");
+        setTheme("dark");
       }
     }
   };
   return (
-    <div className="flex items-center justify-center bg-background-light dark:bg-background-dark self-center w-full py-4">
+    <div className="flex items-center justify-center bg-background-light dark:bg-background-dark self-center w-full h-12 gap-3 md:gap-5 rounded-md">
       <Image src={sun} alt="Sun icon for light mode" />
-      <label className="relative peer inline-flex items-center cursor-pointer mx-3 md:mx-5">
+      <label className="relative peer inline-flex items-center cursor-pointer">
         <input type="checkbox" value="" className="sr-only peer" />
         <div
           onClick={toggleDarkMode}
