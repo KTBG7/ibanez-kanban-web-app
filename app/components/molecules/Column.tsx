@@ -29,7 +29,7 @@ const Column = ({ column, className, id }: ColumnProps) => {
         </div>
       ) : (
         <div
-          className={`${className} flex items-center justify-center w-96 h-full flex-grow flex-shrink-0 rounded-md text-heading_XL text-typography-grey bg-background-medium`}
+          className={`${className} flex items-center justify-center w-96 h-full flex-grow flex-shrink-0 rounded-md text-heading_XL text-typography-grey bg-background-medium dark:bg-dark_grey_secondary`}
         >
           + New Column
         </div>
