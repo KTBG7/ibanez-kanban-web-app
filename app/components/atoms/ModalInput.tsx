@@ -33,7 +33,7 @@ const ModalInput = memo(function ModalInput({
       </label>
       {inputType === "textArea" ? (
         <textarea
-          className={`${className ? className : " "}  h-28 resize-none border border-lines-light p-4 dark:border-lines-dark dark:bg-dark_grey_secondary rounded-md text-body_L text-typography-black dark:focus:text-white placeholder-typography-grey`}
+          className={`${className ? className : " "}  h-28 resize-none border border-lines-light p-4 dark:border-lines-dark dark:bg-dark_grey_secondary rounded-md text-body_L text-typography-black dark:text-white placeholder-typography-grey`}
           value={value}
           onChange={(e) => onChange(setState, e)}
           placeholder="e.g. It’s always good to take a break. This 15 minute break will 
@@ -43,7 +43,7 @@ recharge the batteries a little."
       {inputType === "input" ? (
         <input
           placeholder={placeholder ? placeholder : "e.g. Make coffee"}
-          className={`${className ? className : ""} border border-lines-light p-4 dark:border-lines-dark h-10 rounded-md text-body_L dark:bg-dark_grey_secondary text-typography-black dark:text-white dark:focus:text-white placeholder-typography-grey`}
+          className={`${className ? className : ""} border border-lines-light p-4 dark:border-lines-dark h-10 rounded-md text-body_L dark:bg-dark_grey_secondary text-typography-black dark:text-white placeholder-typography-grey`}
           value={value}
           onChange={(e) => onChange(setState, e)}
         />
