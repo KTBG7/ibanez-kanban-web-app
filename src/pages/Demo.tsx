@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Navbar from '../components/templates/Navbar';
-import data from '../../public/data.json';
+import data from '../utils/data.json';
 import Board from '../components/templates/Board';
 import UserContextProvider from '../contexts/UserContextProvider';
 import { Board as BoardType, Boards } from '../types/GlobalTypes';
@@ -21,7 +21,7 @@ export default function Demo() {
       <UserContextProvider
         currBoard={currentBoard}
         colNames={colNames}
-        boardData={boardData}
+        boards={boardData}
       >
         <Navbar
           sidebarActive={sidebarActive}
