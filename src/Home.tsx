@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 const Home = () => {
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <div className="flex flex-col items-center gap-4 px-2">
-        <h1 className="text-6xl md:text-7xl font-bold">Ibanez Kanban</h1>
-        <h3 className="text-3xl">by Kevin Ibanez</h3>
-        <p className="md:text-2xl px-3 text-center">
+      <div className="flex flex-col items-center gap-4 text-center">
+        <h1 className="text-5xl md:text-7xl font-bold">Ibanez Kanban</h1>
+        <h3 className="text-2xl">by Kevin Ibanez</h3>
+        <p className="md:text-2xl px-3">
           Choose <b>Demo</b> for a Kanban experience with pre-defined data or
           <b className="text-typography-purple"> Login</b> to the personalized
           experience!
