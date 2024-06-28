@@ -10,7 +10,7 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [submitted, setSubmitted] = useState(false);
-  const { data } = useQuery({
+  const { data, error } = useQuery({
     queryKey: ['login'],
     queryFn: async () => userSignUp(email, password),
     enabled: !!submitted,
@@ -30,12 +30,15 @@ const SignUp = () => {
   };
 
   useEffect(() => {
-    if (data && authCtx.dispatchUser && data.statusCode === 200) {
+    if (data && authCtx.dispatchUser && data?.statusCode === 200) {
       authCtx.dispatchUser({ token: data.csrf, email: email });
       navigate('/login');
     }
+    if (error && data?.statusCode !== 200) {
+      alert('There has been an issue signin up please try again.');
+    }
     setSubmitted(false);
-  }, [authCtx, data, navigate, email]);
+  }, [authCtx, data, navigate, email, error]);
 
   return (
     <div className="flex items-center justify-center min-h-screen">
