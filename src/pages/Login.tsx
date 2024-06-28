@@ -34,7 +34,7 @@ const Login = () => {
       setSubmitted(false);
     }
     if (data && data.statusCode === 200 && authCtx.dispatchUser && !error) {
-      authCtx.dispatchUser(data.user);
+      authCtx.dispatchUser(data.csrf);
       setSubmitted(false);
     }
   }, [authCtx, data, error, submitted]);
