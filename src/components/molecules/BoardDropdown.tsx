@@ -20,8 +20,8 @@ const BoardDropdown = () => {
   const [logout, setLogout] = useState(false);
   const { data, error } = useQuery({
     queryKey: ['logout'],
-    queryFn: () => postUserLogout(authContext.user ?? ''),
-    enabled: logout && authContext.user !== null ? true : false,
+    queryFn: () => postUserLogout(authContext.user.token ?? ''),
+    enabled: logout && authContext.user.token !== null ? true : false,
   });
   const closeEditModal = () => setShowEditModal(false);
   const openEditModal = () => setShowEditModal(true);
@@ -87,7 +87,7 @@ const BoardDropdown = () => {
         </Button>
       </li>
       <li className="hover:bg-button-secondary_light_hover dark:hover:bg-button-secondary_dark dark:hover:text-button-secondary_text dark:text-white rounded-b-md">
-        {authContext.user && !logout ? (
+        {authContext.user.token && !logout ? (
           <Button
             buttonType=""
             className="w-full py-2 hover:cursor-pointer"

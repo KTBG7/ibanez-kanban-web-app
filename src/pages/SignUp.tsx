@@ -31,11 +31,11 @@ const SignUp = () => {
 
   useEffect(() => {
     if (data && authCtx.dispatchUser && data.statusCode === 200) {
-      authCtx.dispatchUser(data.csrf);
+      authCtx.dispatchUser({ token: data.csrf, email: email });
       navigate('/login');
     }
     setSubmitted(false);
-  }, [authCtx, data, navigate]);
+  }, [authCtx, data, navigate, email]);
 
   useEffect(() => {
     if (authCtx.user) {

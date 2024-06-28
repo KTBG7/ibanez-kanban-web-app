@@ -13,8 +13,9 @@ const Kanban = () => {
   const navigate = useNavigate();
   const { data, error } = useQuery({
     queryKey: ['boards'],
-    queryFn: () => getBoards(authCtx.user ?? ''),
-    enabled: !!authCtx.user,
+    queryFn: () =>
+      getBoards(authCtx.user.token ?? '', authCtx.user.email ?? ''),
+    enabled: !!authCtx.user.email,
   });
   const [sidebarActive, setSidebarActive] = useState(false);
   const [boardData, setBoardData] = useState<Boards | null>(null);

@@ -1,7 +1,10 @@
 import React, { createContext, useReducer, Dispatch, useMemo } from 'react';
 
 type AuthContextType = {
-  user: string | null;
+  user: {
+    token: string | null;
+    email: string | null;
+  };
   dispatchUser: Dispatch<any> | null;
 };
 
@@ -13,7 +16,7 @@ type AuthContextProviderProps = {
   children: React.ReactNode;
 };
 export const AuthContext = createContext<AuthContextType>({
-  user: '',
+  user: { token: null, email: null },
   dispatchUser: null,
 });
 
