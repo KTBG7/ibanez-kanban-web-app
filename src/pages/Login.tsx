@@ -52,6 +52,7 @@ const Login = () => {
             type="email"
             name="email"
             id="email"
+            required
             onChange={(e) => {
               handleChange(e, 'email');
             }}
@@ -64,6 +65,7 @@ const Login = () => {
             type="password"
             name="password"
             id="password"
+            required
             onChange={(e) => handleChange(e, 'password')}
             className="border border-gray-400 flex-grow"
           />
