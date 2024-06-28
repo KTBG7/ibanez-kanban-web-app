@@ -21,7 +21,7 @@ const BoardDropdown = () => {
   const { data, error } = useQuery({
     queryKey: ['logout'],
     queryFn: () => postUserLogout(authContext.user ?? ''),
-    enabled: logout && authContext.user ? true : false,
+    enabled: logout && authContext.user !== null ? true : false,
   });
   const closeEditModal = () => setShowEditModal(false);
   const openEditModal = () => setShowEditModal(true);
@@ -61,6 +61,7 @@ const BoardDropdown = () => {
       alert('Error Logging out, please refresh and try again.');
     }
     if (data && data?.statusCode === 200 && authContext.dispatchUser) {
+      setLogout(false);
       authContext.dispatchUser(null);
       navigate('/');
     }
