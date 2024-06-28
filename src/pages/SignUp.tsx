@@ -36,8 +36,8 @@ const SignUp = () => {
     }
     if (error && data?.statusCode !== 200) {
       alert('There has been an issue signin up please try again.');
+      setSubmitted(false);
     }
-    setSubmitted(false);
   }, [authCtx, data, navigate, email, error]);
 
   return (
