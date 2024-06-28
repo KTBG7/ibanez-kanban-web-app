@@ -35,14 +35,9 @@ const Login = () => {
     }
     if (data && data?.statusCode === 200 && authCtx.dispatchUser && submitted) {
       authCtx.dispatchUser({ token: data.csrf, email: email });
-    }
-    setSubmitted(false);
-  }, [authCtx, data, error, submitted, navigate, email]);
-  useEffect(() => {
-    if (!submitted && data && data?.statusCode === 200) {
       navigate('/kanban');
     }
-  }, [authCtx, navigate, data, submitted]);
+  }, [authCtx, data, error, submitted, navigate, email]);
   return (
     <div className="flex items-center justify-center min-h-screen">
       <form
