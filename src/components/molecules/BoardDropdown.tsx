@@ -98,10 +98,9 @@ const BoardDropdown = () => {
         ) : (
           <Link
             to={'/login'}
-            className="w-full py-2 hover:cursor-pointer"
-            onClick={openDeleteModal}
+            className="flex flex-grow justify-center w-full py-2 hover:cursor-pointer"
           >
-            <span>Log In</span>
+            <span className="text-center">Log In</span>
           </Link>
         )}
       </li>
