@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, Dispatch, useMemo } from 'react';
+import React, { createContext, useReducer, Dispatch } from 'react';
 
 type AuthContextType = {
   user: {
@@ -23,13 +23,10 @@ export const AuthContext = createContext<AuthContextType>({
 const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   const [user, dispatchUser] = useReducer(updateUser, '');
 
-  const authContextValue = useMemo(
-    () => ({
-      user,
-      dispatchUser,
-    }),
-    [user],
-  );
+  const authContextValue = {
+    user,
+    dispatchUser,
+  };
 
   return (
     <AuthContext.Provider value={authContextValue}>
