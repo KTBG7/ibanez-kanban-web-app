@@ -11,7 +11,7 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const { data, error } = useQuery({
-    queryKey: ['login'],
+    queryKey: ['signup'],
     queryFn: async () => userSignUp(email, password),
     enabled: !!submitted,
   });
