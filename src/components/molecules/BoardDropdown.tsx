@@ -60,9 +60,9 @@ const BoardDropdown = () => {
     if ((data && data?.statusCode !== 200) || error) {
       alert('Error Logging out, please refresh and try again.');
     }
-    if (data && data?.statusCode === 200 && authContext.dispatchUser) {
+    if (data && data?.statusCode === 200 && authContext.setUser) {
       setLogout(false);
-      authContext.dispatchUser(null);
+      authContext.setUser({ token: null, email: null });
       navigate('/');
     }
   }, [data, error, navigate, authContext]);

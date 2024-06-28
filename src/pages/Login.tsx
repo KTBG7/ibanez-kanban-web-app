@@ -33,8 +33,8 @@ const Login = () => {
   }, []);
 
   useEffect(() => {
-    if (data && authCtx.dispatchUser && data?.statusCode === 200) {
-      authCtx.dispatchUser({ token: data.csrf, email: email });
+    if (data && authCtx.setUser && data?.statusCode === 200) {
+      authCtx.setUser({ token: data.csrf, email: email });
       setSubmitted(false);
       navigate('/kanban');
     }

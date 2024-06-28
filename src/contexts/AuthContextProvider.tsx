@@ -1,17 +1,19 @@
-import React, { createContext, useReducer, Dispatch } from 'react';
+import React, {
+  Dispatch,
+  SetStateAction,
+  createContext,
+  useEffect,
+  useState,
+} from 'react';
 
 type AuthContextType = {
   user: {
     token: string | null;
     email: string | null;
   };
-  dispatchUser: Dispatch<any> | null;
-};
-
-const updateUser = (_state: string, action: any) => {
-  return {
-    ...action,
-  };
+  setUser:
+    | Dispatch<SetStateAction<{ token: string | null; email: string | null }>>
+    | (() => void);
 };
 
 type AuthContextProviderProps = {
@@ -19,19 +21,24 @@ type AuthContextProviderProps = {
 };
 export const AuthContext = createContext<AuthContextType>({
   user: { token: null, email: null },
-  dispatchUser: null,
+  setUser: () => {},
 });
 
 const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
-  const [user, dispatchUser] = useReducer(updateUser, {
+  const [user, setUser] = useState<{
+    token: string | null;
+    email: string | null;
+  }>({
     token: null,
     email: null,
   });
 
   const authContextValue = {
     user,
-    dispatchUser,
+    setUser,
   };
+
+  useEffect(() => {}, [user]);
 
   return (
     <AuthContext.Provider value={authContextValue}>
