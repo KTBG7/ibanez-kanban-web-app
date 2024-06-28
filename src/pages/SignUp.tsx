@@ -37,12 +37,6 @@ const SignUp = () => {
     setSubmitted(false);
   }, [authCtx, data, navigate, email]);
 
-  useEffect(() => {
-    if (authCtx.user) {
-      navigate('/kanban');
-    }
-  }, [authCtx, navigate]);
-
   return (
     <div className="flex items-center justify-center min-h-screen">
       <form
