@@ -32,6 +32,7 @@ const SignUp = () => {
   useEffect(() => {
     if (data && authCtx.dispatchUser && data?.statusCode === 200) {
       authCtx.dispatchUser({ token: data.csrf, email: email });
+      setSubmitted(false);
       navigate('/login');
     }
     if (error && data?.statusCode !== 200) {

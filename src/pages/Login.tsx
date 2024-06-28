@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { ChangeEvent, useContext, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react';
 import { userLogin } from '../utils/queryHelper';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContextProvider';
@@ -15,7 +15,8 @@ const Login = () => {
     queryFn: async () => userLogin(email, password),
     enabled: !!submitted,
   });
-  const handleLogin = () => {
+  const handleLogin = (e: FormEvent) => {
+    e.preventDefault();
     setSubmitted(true);
   };
 
@@ -41,7 +42,10 @@ const Login = () => {
   }, [authCtx, data, error, submitted, navigate, email]);
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <form className="w-96 flex flex-col gap-5 items-center">
+      <form
+        onSubmit={handleLogin}
+        className="w-96 flex flex-col gap-5 items-center"
+      >
         <div className="flex flex-col w-full">
           <label>Email:</label>
           <input
@@ -68,7 +72,7 @@ const Login = () => {
         </div>
         <div className="flex items-center gap-4">
           <Link to={'/signup'}>Sign Up</Link>
-          <button onClick={handleLogin}>Login</button>
+          <button type="submit">Login</button>
         </div>
       </form>
     </div>
