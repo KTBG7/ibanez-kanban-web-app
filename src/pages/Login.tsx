@@ -33,12 +33,18 @@ const Login = () => {
     if (data && data.statusCode !== 200) {
       setSubmitted(false);
     }
-    if (data && data.statusCode === 200 && authCtx.dispatchUser && !error) {
-      authCtx.dispatchUser(data.csrf);
+    if (
+      data &&
+      data.statusCode === 200 &&
+      authCtx.dispatchUser &&
+      !error &&
+      email
+    ) {
+      authCtx.dispatchUser({ token: data.csrf, email: email });
       navigate('/kanban');
       setSubmitted(false);
     }
-  }, [authCtx, data, error, submitted, navigate]);
+  }, [authCtx, data, error, submitted, navigate, email]);
   return (
     <div className="flex items-center justify-center min-h-screen">
       <form
