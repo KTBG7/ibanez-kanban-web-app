@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react';
+import { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { userLogin } from '../utils/queryHelper';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContextProvider';
@@ -15,8 +15,7 @@ const Login = () => {
     queryFn: async () => userLogin(email, password),
     enabled: !!submitted,
   });
-  const handleLogin = (e: FormEvent) => {
-    e.preventDefault();
+  const handleLogin = () => {
     setSubmitted(true);
   };
 
@@ -30,11 +29,13 @@ const Login = () => {
   };
 
   useEffect(() => {
+    console.log(data);
     if (data && data?.statusCode !== 200) {
       alert('There has been an issue loggin in.');
       setSubmitted(false);
     }
     if (data && data?.statusCode === 200 && authCtx.dispatchUser) {
+      console.log('working');
       authCtx.dispatchUser({ token: data.csrf, email: email });
       navigate('/kanban');
       setSubmitted(false);
@@ -42,10 +43,7 @@ const Login = () => {
   }, [authCtx, data, error, submitted, navigate, email]);
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <form
-        onSubmit={handleLogin}
-        className="w-96 flex flex-col gap-5 items-center"
-      >
+      <form className="w-96 flex flex-col gap-5 items-center">
         <div className="flex flex-col w-full">
           <label>Email:</label>
           <input
@@ -72,7 +70,7 @@ const Login = () => {
         </div>
         <div className="flex items-center gap-4">
           <Link to={'/signup'}>Sign Up</Link>
-          <button type="submit">Login</button>
+          <button onClick={handleLogin}>Login</button>
         </div>
       </form>
     </div>
