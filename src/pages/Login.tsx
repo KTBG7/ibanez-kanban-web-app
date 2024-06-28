@@ -28,20 +28,26 @@ const Login = () => {
       setPassword(e.target.value);
     }
   };
+  useEffect(() => {
+    setSubmitted(false);
+  }, []);
 
   useEffect(() => {
-    if (data && data?.statusCode !== 200 && error) {
-      alert('There has been an issue loggin in.');
-    }
-    if (data && data?.statusCode === 200 && authCtx.dispatchUser && submitted) {
+    if (data && authCtx.dispatchUser && data?.statusCode === 200) {
       authCtx.dispatchUser({ token: data.csrf, email: email });
+      setSubmitted(false);
       navigate('/kanban');
+    }
+    if (error && data?.statusCode !== 200) {
+      alert('There has been an issue logging in, please try again.');
+      setSubmitted(false);
     }
   }, [authCtx, data, error, submitted, navigate, email]);
   return (
     <div className="flex items-center justify-center min-h-screen">
       <form
-        onSubmit={handleLogin}
+        id="loginForm"
+        onSubmit={(e) => handleLogin(e)}
         className="w-96 flex flex-col gap-5 items-center"
       >
         <div className="flex flex-col w-full">
@@ -70,7 +76,9 @@ const Login = () => {
         </div>
         <div className="flex items-center gap-4">
           <Link to={'/signup'}>Sign Up</Link>
-          <button type="submit">Login</button>
+          <button type="submit" form="loginForm">
+            Login
+          </button>
         </div>
       </form>
     </div>
