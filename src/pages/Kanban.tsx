@@ -26,10 +26,14 @@ const Kanban = () => {
   };
 
   useEffect(() => {
-    if (!authCtx.user || (error && data.statusCode !== 200)) {
+    if (
+      !authCtx.user.email ||
+      !authCtx.user.token ||
+      (error && data?.statusCode !== 200)
+    ) {
       navigate('/login');
     }
-    if (data && data.statusCode === 200 && !error) {
+    if (data && data?.statusCode === 200 && !error) {
       setBoardData(data.boards);
     }
   }, [authCtx, navigate, data, error]);
