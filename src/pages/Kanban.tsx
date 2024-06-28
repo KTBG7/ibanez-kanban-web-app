@@ -11,12 +11,10 @@ import { getBoards } from '../utils/queryHelper';
 const Kanban = () => {
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
-  const [userExists, setUserExists] = useState(false);
   const { data, error } = useQuery({
     queryKey: ['boards'],
     queryFn: () =>
       getBoards(authCtx.user.token ?? '', authCtx.user.email ?? ''),
-    enabled: userExists,
   });
   const [sidebarActive, setSidebarActive] = useState(false);
   const [boardData, setBoardData] = useState<Boards | null>(null);
@@ -30,13 +28,10 @@ const Kanban = () => {
     if (authCtx.user.token === null) {
       navigate('/login');
     }
-    if (!userExists && authCtx.user.token && authCtx.user.email) {
-      setUserExists(true);
-    }
     if (data && data?.statusCode === 200 && !error) {
       setBoardData(data.boards);
     }
-  }, [authCtx, navigate, data, error, userExists]);
+  }, [authCtx, navigate, data, error]);
   const colNames: string[] = [];
   if (boardData && boardData[0]?.columns) {
     boardData[0].columns.forEach((col: Column) => colNames.push(col.name));
