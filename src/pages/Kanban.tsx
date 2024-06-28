@@ -26,11 +26,7 @@ const Kanban = () => {
   };
 
   useEffect(() => {
-    if (
-      !authCtx.user.email ||
-      !authCtx.user.token ||
-      (error && data?.statusCode !== 200)
-    ) {
+    if ((!authCtx.user.email && !authCtx.user.token) || error) {
       navigate('/login');
     }
     if (data && data?.statusCode === 200 && !error) {
