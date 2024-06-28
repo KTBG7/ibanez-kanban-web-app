@@ -32,13 +32,17 @@ const Login = () => {
   useEffect(() => {
     if (data && data?.statusCode !== 200 && error) {
       alert('There has been an issue loggin in.');
-      setSubmitted(false);
     }
-    if (data && data?.statusCode === 200 && authCtx.dispatchUser) {
+    if (data && data?.statusCode === 200 && authCtx.dispatchUser && submitted) {
       authCtx.dispatchUser({ token: data.csrf, email: email });
+    }
+    setSubmitted(false);
+  }, [authCtx, data, error, submitted, navigate, email]);
+  useEffect(() => {
+    if (!submitted && data && data?.statusCode === 200) {
       navigate('/kanban');
     }
-  }, [authCtx, data, error, submitted, navigate, email]);
+  }, [authCtx, navigate, data, submitted]);
   return (
     <div className="flex items-center justify-center min-h-screen">
       <form
