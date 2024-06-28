@@ -15,7 +15,7 @@ const Kanban = () => {
     queryKey: ['boards'],
     queryFn: () =>
       getBoards(authCtx.user.token ?? '', authCtx.user.email ?? ''),
-    enabled: !!authCtx.user.email,
+    enabled: authCtx.user.token !== null,
   });
   const [sidebarActive, setSidebarActive] = useState(false);
   const [boardData, setBoardData] = useState<Boards | null>(null);
@@ -26,7 +26,7 @@ const Kanban = () => {
   };
 
   useEffect(() => {
-    if ((!authCtx.user.email && !authCtx.user.token) || error) {
+    if (authCtx.user.token === null) {
       navigate('/login');
     }
     if (data && data?.statusCode === 200 && !error) {
