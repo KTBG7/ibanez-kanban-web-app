@@ -29,13 +29,11 @@ const Login = () => {
   };
 
   useEffect(() => {
-    console.log(data);
-    if (data && data?.statusCode !== 200) {
+    if (data && data?.statusCode !== 200 && error) {
       alert('There has been an issue loggin in.');
       setSubmitted(false);
     }
     if (data && data?.statusCode === 200 && authCtx.dispatchUser) {
-      console.log('working');
       authCtx.dispatchUser({ token: data.csrf, email: email });
       navigate('/kanban');
       setSubmitted(false);
