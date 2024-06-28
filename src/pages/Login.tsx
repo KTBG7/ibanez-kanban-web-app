@@ -37,7 +37,6 @@ const Login = () => {
     if (data && data?.statusCode === 200 && authCtx.dispatchUser) {
       authCtx.dispatchUser({ token: data.csrf, email: email });
       navigate('/kanban');
-      setSubmitted(false);
     }
   }, [authCtx, data, error, submitted, navigate, email]);
   return (
