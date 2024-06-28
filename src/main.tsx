@@ -36,8 +36,8 @@ const router = createBrowserRouter([
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: false,
-      gcTime: 60,
+      retry: true,
+      gcTime: 0,
     },
   },
 });

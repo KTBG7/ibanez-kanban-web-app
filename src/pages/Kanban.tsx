@@ -15,6 +15,7 @@ const Kanban = () => {
     queryKey: ['boards'],
     queryFn: async () =>
       getBoards(authCtx.user.token ?? '', authCtx.user.email ?? ''),
+    enabled: authCtx.user.token !== null && authCtx.user.email !== null,
   });
   const [sidebarActive, setSidebarActive] = useState(false);
   const [boardData, setBoardData] = useState<Boards | null>(null);
@@ -32,6 +33,7 @@ const Kanban = () => {
       setBoardData(data.boards);
     }
   }, [authCtx, navigate, data, error]);
+
   const colNames: string[] = [];
   if (boardData && boardData[0]?.columns) {
     boardData[0].columns.forEach((col: Column) => colNames.push(col.name));

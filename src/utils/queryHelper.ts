@@ -30,10 +30,9 @@ export const getBoards = async (user: string, email: string) => {
     method: 'GET',
     credentials: 'include',
     headers: {
-      'Content-Type': 'application/json',
       'x-csrf-token': user,
+      email: email,
     },
-    body: JSON.stringify({ email }),
   });
   return response.json();
 };
