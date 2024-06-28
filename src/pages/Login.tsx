@@ -10,7 +10,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [submitted, setSubmitted] = useState(true);
-  const { data, error, isFetching } = useQuery({
+  const { data, error } = useQuery({
     queryKey: ['login'],
     queryFn: async () => userLogin(email, password),
     enabled: !!submitted,
@@ -35,14 +35,10 @@ const Login = () => {
     }
     if (data && data.statusCode === 200 && authCtx.dispatchUser && !error) {
       authCtx.dispatchUser(data.csrf);
+      navigate('/kanban');
       setSubmitted(false);
     }
-  }, [authCtx, data, error, submitted]);
-  useEffect(() => {
-    if (authCtx.user && data.statusCode === 200 && !isFetching && !error) {
-      navigate('/kanban');
-    }
-  }, [authCtx, data, navigate, isFetching, error]);
+  }, [authCtx, data, error, submitted, navigate]);
   return (
     <div className="flex items-center justify-center min-h-screen">
       <form
