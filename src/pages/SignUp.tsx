@@ -30,18 +30,19 @@ const SignUp = () => {
   };
 
   useEffect(() => {
+    if (data && authCtx.dispatchUser && data.statusCode === 200) {
+      authCtx.dispatchUser(data.csrf);
+      navigate('/login');
+    }
+    setSubmitted(false);
+  }, [authCtx, data, navigate]);
+
+  useEffect(() => {
     if (authCtx.user) {
       navigate('/kanban');
     }
   }, [authCtx, navigate]);
 
-  useEffect(() => {
-    if (data && authCtx.dispatchUser && data.statusCode === 200) {
-      authCtx.dispatchUser(data.csrf);
-      navigate('/kanban');
-    }
-    setSubmitted(false);
-  }, [authCtx, data, navigate]);
   return (
     <div className="flex items-center justify-center min-h-screen">
       <form
