@@ -9,7 +9,9 @@ type AuthContextType = {
 };
 
 const updateUser = (_state: string, action: any) => {
-  return action;
+  return {
+    ...action,
+  };
 };
 
 type AuthContextProviderProps = {
@@ -21,7 +23,10 @@ export const AuthContext = createContext<AuthContextType>({
 });
 
 const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
-  const [user, dispatchUser] = useReducer(updateUser, '');
+  const [user, dispatchUser] = useReducer(updateUser, {
+    token: null,
+    email: null,
+  });
 
   const authContextValue = {
     user,
