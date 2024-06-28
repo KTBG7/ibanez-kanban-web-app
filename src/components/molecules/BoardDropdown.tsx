@@ -62,6 +62,7 @@ const BoardDropdown = () => {
     }
     if (data && data?.statusCode === 200 && authContext.dispatchUser) {
       authContext.dispatchUser(null);
+      setLogout(false);
       navigate('/');
     }
   }, [data, error, navigate, authContext]);
