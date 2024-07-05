@@ -52,7 +52,7 @@ const SignUp = () => {
       authCtx.dispatchUser(data.csrf);
       navigate('/kanban');
     }
-  }, [authCtx, data, navigate, email, error]);
+  }, [authCtx, data, navigate, email]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-background-light gap-10">

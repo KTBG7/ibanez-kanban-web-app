@@ -39,7 +39,7 @@ const UserContextProvider = ({
   const authCtx = useContext(AuthContext);
   const postBoardsQuery = useQuery({
     queryKey: ['updateBoards'],
-    queryFn: async () => postBoards(boards, authCtx.user.token ?? ''),
+    queryFn: async () => postBoards(boards, authCtx.user ?? ''),
     enabled: !!userSaved,
   });
   const updateBoard = useCallback((board: Board) => {
