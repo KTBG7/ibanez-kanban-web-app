@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('./assets/Plus_Jakarta_Sans/PlusJakartaSans-VariableFont_wght.ttf')
+    format('ttf');
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans Italic';
+  src: url('./assets/Plus_Jakarta_Sans/PlusJakartaSans-Italic-VariableFont_wght.ttf')
+    format('ttf');
+}
+
+@layer base {
+  html {
+    font-family: 'Plus Jakarta Sans', system-ui, sans;
+  }
+}
+
 input,
 textarea {
   @apply outline-none;

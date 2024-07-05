@@ -7,13 +7,12 @@ import React, {
 } from 'react';
 
 type AuthContextType = {
-  user: {
-    token: string | null;
-    email: string | null;
-  };
-  setUser:
-    | Dispatch<SetStateAction<{ token: string | null; email: string | null }>>
-    | (() => void);
+  user: string | null;
+  dispatchUser: Dispatch<any> | null;
+};
+
+const updateUser = (_state: string, action: string) => {
+  return action;
 };
 
 type AuthContextProviderProps = {

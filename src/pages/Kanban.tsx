@@ -7,15 +7,16 @@ import { AuthContext } from '../contexts/AuthContextProvider';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getBoards } from '../utils/queryHelper';
+import { getUserCookie } from '../utils/userUtils';
 
 const Kanban = () => {
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
+  const userCookie = getUserCookie();
   const { data, error } = useQuery({
     queryKey: ['boards'],
-    queryFn: async () =>
-      getBoards(authCtx.user.token ?? '', authCtx.user.email ?? ''),
-    enabled: authCtx.user.token !== null && authCtx.user.email !== null,
+    queryFn: () => getBoards(authCtx.user ?? ''),
+    enabled: !!userCookie,
   });
   const [sidebarActive, setSidebarActive] = useState(false);
   const [boardData, setBoardData] = useState<Boards | null>(null);
@@ -26,7 +27,13 @@ const Kanban = () => {
   };
 
   useEffect(() => {
-    if (authCtx.user.token === null) {
+    if (!userCookie) {
+      navigate('/login');
+    }
+  }, [navigate, userCookie]);
+
+  useEffect(() => {
+    if (data && data.statusCode !== 200) {
       navigate('/login');
     }
     if (data && data?.statusCode === 200 && !error) {

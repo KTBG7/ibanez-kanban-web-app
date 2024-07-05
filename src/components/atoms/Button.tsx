@@ -32,7 +32,11 @@ const Button = ({
       break;
   }
   return (
-    <button onClick={onClick} className={`${className} ${classes}`}>
+    <button
+      onClick={onClick}
+      className={`${className} ${classes}`}
+      type="button"
+    >
       {children}
     </button>
   );

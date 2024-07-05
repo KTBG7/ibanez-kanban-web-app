@@ -3,14 +3,16 @@ import { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react';
 import { userLogin } from '../utils/queryHelper';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContextProvider';
+import { getUserCookie } from '../utils/userUtils';
 
 const Login = () => {
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
+  const userCookie = getUserCookie();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [submitted, setSubmitted] = useState(false);
-  const { data, error } = useQuery({
+  const { data, error, isFetching } = useQuery({
     queryKey: ['login'],
     queryFn: async () => userLogin(email, password),
     enabled: !!submitted,
@@ -33,8 +35,13 @@ const Login = () => {
   }, []);
 
   useEffect(() => {
-    if (data && authCtx.setUser && data?.statusCode === 200) {
-      authCtx.setUser({ token: data.csrf, email: email });
+    if (userCookie) {
+      navigate('/kanban');
+    }
+  }, [navigate, userCookie]);
+
+  useEffect(() => {
+    if (data && data.statusCode !== 200) {
       setSubmitted(false);
       navigate('/kanban');
     }
@@ -42,7 +49,12 @@ const Login = () => {
       alert('There has been an issue logging in, please try again.');
       setSubmitted(false);
     }
-  }, [authCtx, data, error, submitted, navigate, email]);
+  }, [authCtx, data, error, submitted]);
+  useEffect(() => {
+    if (authCtx.user && data && data.statusCode === 200) {
+      navigate('/kanban');
+    }
+  }, [authCtx, data, navigate, isFetching, error]);
   return (
     <div className="flex items-center justify-center min-h-screen">
       <form
