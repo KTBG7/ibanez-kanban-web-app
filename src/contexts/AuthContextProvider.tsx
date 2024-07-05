@@ -5,7 +5,7 @@ type AuthContextType = {
   dispatchUser: Dispatch<any> | null;
 };
 
-const updateUser = (_state: string, action: any) => {
+const updateUser = (_state: string, action: string) => {
   return action;
 };
 

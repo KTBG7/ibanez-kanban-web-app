@@ -3,13 +3,15 @@ import { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react';
 import { userLogin } from '../utils/queryHelper';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContextProvider';
+import { getUserCookie } from '../utils/userUtils';
 
 const Login = () => {
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
+  const userCookie = getUserCookie();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [submitted, setSubmitted] = useState(true);
+  const [submitted, setSubmitted] = useState(false);
   const { data, error, isFetching } = useQuery({
     queryKey: ['login'],
     queryFn: async () => userLogin(email, password),
@@ -30,6 +32,12 @@ const Login = () => {
   };
 
   useEffect(() => {
+    if (userCookie) {
+      navigate('/kanban');
+    }
+  }, [navigate, userCookie]);
+
+  useEffect(() => {
     if (data && data.statusCode !== 200) {
       setSubmitted(false);
     }
@@ -39,7 +47,7 @@ const Login = () => {
     }
   }, [authCtx, data, error, submitted]);
   useEffect(() => {
-    if (authCtx.user && data.statusCode === 200 && !isFetching && !error) {
+    if (authCtx.user && data && data.statusCode === 200) {
       navigate('/kanban');
     }
   }, [authCtx, data, navigate, isFetching, error]);
