@@ -30,6 +30,9 @@ const Login = () => {
       setPassword(e.target.value);
     }
   };
+  useEffect(() => {
+    setSubmitted(false);
+  }, []);
 
   useEffect(() => {
     if (userCookie) {
@@ -40,9 +43,10 @@ const Login = () => {
   useEffect(() => {
     if (data && data.statusCode !== 200) {
       setSubmitted(false);
+      navigate('/kanban');
     }
-    if (data && data.statusCode === 200 && authCtx.dispatchUser && !error) {
-      authCtx.dispatchUser(data.csrf);
+    if (error && data?.statusCode !== 200) {
+      alert('There has been an issue logging in, please try again.');
       setSubmitted(false);
     }
   }, [authCtx, data, error, submitted]);
@@ -54,7 +58,8 @@ const Login = () => {
   return (
     <div className="flex items-center justify-center min-h-screen">
       <form
-        onSubmit={handleLogin}
+        id="loginForm"
+        onSubmit={(e) => handleLogin(e)}
         className="w-96 flex flex-col gap-5 items-center"
       >
         <div className="flex flex-col w-full">
@@ -63,6 +68,7 @@ const Login = () => {
             type="email"
             name="email"
             id="email"
+            required
             onChange={(e) => {
               handleChange(e, 'email');
             }}
@@ -75,13 +81,16 @@ const Login = () => {
             type="password"
             name="password"
             id="password"
+            required
             onChange={(e) => handleChange(e, 'password')}
             className="border border-gray-400 flex-grow"
           />
         </div>
         <div className="flex items-center gap-4">
           <Link to={'/signup'}>Sign Up</Link>
-          <button type="submit">Login</button>
+          <button type="submit" form="loginForm">
+            Login
+          </button>
         </div>
       </form>
     </div>

@@ -1,4 +1,10 @@
-import React, { createContext, useReducer, Dispatch, useMemo } from 'react';
+import React, {
+  Dispatch,
+  SetStateAction,
+  createContext,
+  useEffect,
+  useState,
+} from 'react';
 
 type AuthContextType = {
   user: string | null;
@@ -13,20 +19,25 @@ type AuthContextProviderProps = {
   children: React.ReactNode;
 };
 export const AuthContext = createContext<AuthContextType>({
-  user: '',
-  dispatchUser: null,
+  user: { token: null, email: null },
+  setUser: () => {},
 });
 
 const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
-  const [user, dispatchUser] = useReducer(updateUser, '');
+  const [user, setUser] = useState<{
+    token: string | null;
+    email: string | null;
+  }>({
+    token: null,
+    email: null,
+  });
 
-  const authContextValue = useMemo(
-    () => ({
-      user,
-      dispatchUser,
-    }),
-    [user],
-  );
+  const authContextValue = {
+    user,
+    setUser,
+  };
+
+  useEffect(() => {}, [user]);
 
   return (
     <AuthContext.Provider value={authContextValue}>

@@ -52,8 +52,8 @@ const SignUp = () => {
       authCtx.dispatchUser(data.csrf);
       navigate('/kanban');
     }
-    setSubmitted(false);
-  }, [authCtx, data, navigate]);
+  }, [authCtx, data, navigate, email, error]);
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-background-light gap-10">
       <h1 className="text-7xl font-bold">Create an Account</h1>
@@ -77,6 +77,7 @@ const SignUp = () => {
             type="email"
             name="email"
             id="email"
+            required
             onChange={(e) => {
               handleChange(e, 'email');
             }}
@@ -88,6 +89,7 @@ const SignUp = () => {
           <input
             type="password"
             name="password"
+            required
             id="password"
             onChange={(e) => handleChange(e, 'password')}
             className="border border-gray-400 flex-grow"

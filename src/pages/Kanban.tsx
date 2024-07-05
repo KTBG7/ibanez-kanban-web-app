@@ -36,10 +36,11 @@ const Kanban = () => {
     if (data && data.statusCode !== 200) {
       navigate('/login');
     }
-    if (data && data.statusCode === 200 && !error) {
+    if (data && data?.statusCode === 200 && !error) {
       setBoardData(data.boards);
     }
   }, [authCtx, navigate, data, error]);
+
   const colNames: string[] = [];
   if (boardData && boardData[0]?.columns) {
     boardData[0].columns.forEach((col: Column) => colNames.push(col.name));

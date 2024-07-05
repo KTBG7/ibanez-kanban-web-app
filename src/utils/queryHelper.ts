@@ -25,12 +25,13 @@ export const userSignUp = async (email: string, password: string) => {
   return response.json();
 };
 
-export const getBoards = async (user: string) => {
+export const getBoards = async (user: string, email: string) => {
   const response = await fetch(`${API_URL}/boards`, {
     method: 'GET',
     credentials: 'include',
     headers: {
       'x-csrf-token': user,
+      email: email,
     },
   });
   return response.json();
