@@ -3,13 +3,12 @@ import { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { userSignUp } from '../utils/queryHelper';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContextProvider';
-import { getUserCookie } from '../utils/userUtils';
 import Button from '../components/atoms/Button';
+import { setUserSession } from '../utils/userUtils';
 
 const SignUp = () => {
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
-  const userCookie = getUserCookie();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -42,13 +41,8 @@ const SignUp = () => {
   };
 
   useEffect(() => {
-    if (userCookie) {
-      navigate('/kanban');
-    }
-  }, [navigate, userCookie]);
-
-  useEffect(() => {
     if (data && authCtx.dispatchUser && data.statusCode === 200) {
+      setUserSession(data.kanban_user);
       authCtx.dispatchUser(data.csrf);
       navigate('/kanban');
     }

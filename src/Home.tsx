@@ -1,15 +1,15 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { getUserCookie } from './utils/userUtils';
+import { getUserSession } from './utils/userUtils';
 import { useEffect } from 'react';
 
 const Home = () => {
   const navigate = useNavigate();
-  const userCookie = getUserCookie();
+  const userSession = getUserSession();
   useEffect(() => {
-    if (userCookie) {
+    if (userSession) {
       navigate('/kanban');
     }
-  }, [navigate, userCookie]);
+  }, [navigate, userSession]);
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="flex flex-col items-center gap-4 text-center">

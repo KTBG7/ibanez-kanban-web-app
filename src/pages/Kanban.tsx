@@ -7,16 +7,16 @@ import { AuthContext } from '../contexts/AuthContextProvider';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getBoards } from '../utils/queryHelper';
-import { getUserCookie } from '../utils/userUtils';
+import { getUserSession } from '../utils/userUtils';
 
 const Kanban = () => {
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
-  const userCookie = getUserCookie();
+  const userSession = getUserSession();
   const { data, error } = useQuery({
     queryKey: ['boards'],
     queryFn: () => getBoards(authCtx.user ?? ''),
-    enabled: !!userCookie,
+    enabled: !!userSession,
   });
   const [sidebarActive, setSidebarActive] = useState(false);
   const [boardData, setBoardData] = useState<Boards | null>(null);
@@ -27,10 +27,10 @@ const Kanban = () => {
   };
 
   useEffect(() => {
-    if (!userCookie) {
+    if (!userSession) {
       navigate('/login');
     }
-  }, [navigate, userCookie]);
+  }, [navigate, userSession]);
 
   useEffect(() => {
     if (data && data.statusCode !== 200) {

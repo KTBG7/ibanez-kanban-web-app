@@ -3,19 +3,19 @@ import { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react';
 import { userLogin } from '../utils/queryHelper';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContextProvider';
-import { getUserCookie } from '../utils/userUtils';
+import { getUserSession, setUserSession } from '../utils/userUtils';
 
 const Login = () => {
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
-  const userCookie = getUserCookie();
+  const userSession = getUserSession();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const { data, error, isFetching } = useQuery({
     queryKey: ['login'],
     queryFn: async () => userLogin(email, password),
-    enabled: !!submitted,
+    enabled: !!submitted || !!userSession,
   });
   const handleLogin = (e: FormEvent) => {
     e.preventDefault();
@@ -32,16 +32,11 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (userCookie) {
-      navigate('/kanban');
-    }
-  }, [navigate, userCookie]);
-
-  useEffect(() => {
     if (data && data.statusCode !== 200) {
       setSubmitted(false);
     }
     if (data && data.statusCode === 200 && authCtx.dispatchUser && !error) {
+      setUserSession(data.kanban_user);
       authCtx.dispatchUser(data.csrf);
       setSubmitted(false);
     }

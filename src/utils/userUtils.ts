@@ -1,6 +1,7 @@
-export const getUserCookie = () => {
-  const cookies = document.cookie
-    .split('; ')
-    .find((row) => row.startsWith('connect.sid='));
-  return cookies;
+export const setUserSession = (token: string) => {
+  localStorage.setItem('kanban_user', token);
+};
+
+export const getUserSession = () => {
+  return localStorage.getItem('kanban_user');
 };
