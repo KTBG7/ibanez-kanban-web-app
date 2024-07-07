@@ -87,7 +87,7 @@ const BoardDropdown = () => {
         </Button>
       </li>
       <li className="hover:bg-button-secondary_light_hover dark:hover:bg-button-secondary_dark dark:hover:text-button-secondary_text dark:text-white rounded-b-md">
-        {authContext.user && !logout ? (
+        {!logout ? (
           <Button
             buttonType=""
             className="w-full py-2 hover:cursor-pointer"
