@@ -2,9 +2,8 @@ import { Boards } from '../types/GlobalTypes';
 import { getUserSession } from './userUtils';
 export const API_URL = import.meta.env.VITE_KANBAN_BACKEND_URL;
 
-const userSession = getUserSession();
-
 export const userLogin = async (email: string, password: string) => {
+  const userSession = getUserSession();
   const response = await fetch(`${API_URL}/login`, {
     method: 'POST',
     credentials: 'include',
@@ -18,6 +17,7 @@ export const userLogin = async (email: string, password: string) => {
 };
 
 export const userSignUp = async (email: string, password: string) => {
+  const userSession = getUserSession();
   const response = await fetch(`${API_URL}/signup`, {
     method: 'POST',
     credentials: 'include',
@@ -31,6 +31,7 @@ export const userSignUp = async (email: string, password: string) => {
 };
 
 export const getBoards = async (user: string) => {
+  const userSession = getUserSession();
   const response = await fetch(`${API_URL}/boards`, {
     method: 'GET',
     credentials: 'include',
@@ -43,6 +44,7 @@ export const getBoards = async (user: string) => {
 };
 
 export const postBoards = async (boards: Boards, user: string) => {
+  const userSession = getUserSession();
   const response = await fetch(`${API_URL}/update-user-boards`, {
     method: 'POST',
     credentials: 'include',
@@ -57,6 +59,7 @@ export const postBoards = async (boards: Boards, user: string) => {
 };
 
 export const postUserLogout = async (user: string) => {
+  const userSession = getUserSession();
   const response = await fetch(`${API_URL}/logout`, {
     method: 'POST',
     credentials: 'include',
