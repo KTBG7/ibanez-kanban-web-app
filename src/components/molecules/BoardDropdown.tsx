@@ -63,7 +63,7 @@ const BoardDropdown = () => {
     }
     if (data && data?.statusCode === 200 && authContext.dispatchUser) {
       deleteUserSession();
-      authContext.dispatchUser(null);
+      authContext.dispatchUser('');
       navigate('/');
     }
   }, [data, error, navigate, authContext]);

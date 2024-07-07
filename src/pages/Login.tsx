@@ -36,12 +36,9 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (data && data.statusCode === 210) {
+    if (data && data.statusCode === 401) {
       deleteUserSession();
     }
-    // if (data && data.statusCode !== 200) {
-
-    // }
 
     if (
       data &&

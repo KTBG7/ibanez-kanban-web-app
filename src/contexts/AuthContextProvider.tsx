@@ -2,7 +2,7 @@ import React, { createContext, useReducer, Dispatch, useMemo } from 'react';
 
 type AuthContextType = {
   user: string | null;
-  dispatchUser: Dispatch<any> | null;
+  dispatchUser: Dispatch<string> | null;
 };
 
 const updateUser = (_state: string, action: string) => {

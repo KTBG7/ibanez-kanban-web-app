@@ -47,9 +47,9 @@ const SignUp = () => {
 
   useEffect(() => {
     if (data && data.statusCode === 210) {
-      deleteUserSession();
+      navigate('/login');
     }
-    if (data && data.statusCode === 230) {
+    if (data && data.statusCode === 401) {
       deleteUserSession();
       navigate('/login');
     }
