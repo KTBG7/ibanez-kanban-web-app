@@ -7,9 +7,7 @@ const userSession = getUserSession();
 export const userLogin = async (email: string, password: string) => {
   const response = await fetch(`${API_URL}/login`, {
     method: 'POST',
-    credentials: 'same-origin',
-    mode: 'same-origin',
-    referrer: 'https://api.ibanezkanban.com/',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
       kanban_user: userSession ? userSession : '',
@@ -22,8 +20,7 @@ export const userLogin = async (email: string, password: string) => {
 export const userSignUp = async (email: string, password: string) => {
   const response = await fetch(`${API_URL}/signup`, {
     method: 'POST',
-    credentials: 'same-origin',
-    mode: 'same-origin',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
       kanban_user: userSession ? userSession : '',
@@ -36,8 +33,7 @@ export const userSignUp = async (email: string, password: string) => {
 export const getBoards = async (user: string) => {
   const response = await fetch(`${API_URL}/boards`, {
     method: 'GET',
-    credentials: 'same-origin',
-    mode: 'same-origin',
+    credentials: 'include',
     headers: {
       'x-csrf-token': user,
       kanban_user: userSession ? userSession : '',
@@ -49,8 +45,7 @@ export const getBoards = async (user: string) => {
 export const postBoards = async (boards: Boards, user: string) => {
   const response = await fetch(`${API_URL}/update-user-boards`, {
     method: 'POST',
-    credentials: 'same-origin',
-    mode: 'same-origin',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
       'x-csrf-token': user,
@@ -64,8 +59,7 @@ export const postBoards = async (boards: Boards, user: string) => {
 export const postUserLogout = async (user: string) => {
   const response = await fetch(`${API_URL}/logout`, {
     method: 'POST',
-    credentials: 'same-origin',
-    mode: 'same-origin',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
       'x-csrf-token': user,
