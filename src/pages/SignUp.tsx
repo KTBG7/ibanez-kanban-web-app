@@ -4,11 +4,16 @@ import { userSignUp } from '../utils/queryHelper';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContextProvider';
 import Button from '../components/atoms/Button';
-import { setUserSession } from '../utils/userUtils';
+import {
+  deleteUserSession,
+  getUserSession,
+  setUserSession,
+} from '../utils/userUtils';
 
 const SignUp = () => {
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
+  const userSession = getUserSession();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -16,7 +21,7 @@ const SignUp = () => {
   const { data } = useQuery({
     queryKey: ['signup'],
     queryFn: async () => userSignUp(email, password),
-    enabled: !!submitted,
+    enabled: !!submitted || !!userSession,
   });
   const handleSignUp = () => {
     if (password === confirmPassword) {
@@ -41,7 +46,14 @@ const SignUp = () => {
   };
 
   useEffect(() => {
-    if (data && authCtx.dispatchUser && data.statusCode === 200) {
+    if (data && data.statusCode === 210) {
+      deleteUserSession();
+    }
+    if (
+      data &&
+      authCtx.dispatchUser &&
+      (data.statusCode === 200 || data.statusCode === 220)
+    ) {
       setUserSession(data.kanban_user);
       authCtx.dispatchUser(data.csrf);
       navigate('/kanban');

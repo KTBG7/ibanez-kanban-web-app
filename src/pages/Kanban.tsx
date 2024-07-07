@@ -7,7 +7,7 @@ import { AuthContext } from '../contexts/AuthContextProvider';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getBoards } from '../utils/queryHelper';
-import { getUserSession } from '../utils/userUtils';
+import { deleteUserSession, getUserSession } from '../utils/userUtils';
 
 const Kanban = () => {
   const authCtx = useContext(AuthContext);
@@ -33,7 +33,8 @@ const Kanban = () => {
   }, [navigate, userSession]);
 
   useEffect(() => {
-    if (data && data.statusCode !== 200) {
+    if (data && data.statusCode === 401) {
+      deleteUserSession();
       navigate('/login');
     }
     if (data && data.statusCode === 200 && !error) {

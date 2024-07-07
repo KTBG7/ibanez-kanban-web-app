@@ -23,6 +23,7 @@ export const userSignUp = async (email: string, password: string) => {
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
+      kanban_user: userSession ? userSession : '',
     },
     body: JSON.stringify({ email, password }),
   });

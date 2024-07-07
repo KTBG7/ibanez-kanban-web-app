@@ -5,3 +5,7 @@ export const setUserSession = (token: string) => {
 export const getUserSession = () => {
   return localStorage.getItem('kanban_user');
 };
+
+export const deleteUserSession = () => {
+  return localStorage.removeItem('kanban_user');
+};

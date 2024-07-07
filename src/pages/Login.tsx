@@ -3,7 +3,11 @@ import { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react';
 import { userLogin } from '../utils/queryHelper';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContextProvider';
-import { getUserSession, setUserSession } from '../utils/userUtils';
+import {
+  deleteUserSession,
+  getUserSession,
+  setUserSession,
+} from '../utils/userUtils';
 
 const Login = () => {
   const authCtx = useContext(AuthContext);
@@ -32,17 +36,30 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (data && data.statusCode !== 200) {
-      setSubmitted(false);
+    if (data && data.statusCode === 210) {
+      deleteUserSession();
     }
-    if (data && data.statusCode === 200 && authCtx.dispatchUser && !error) {
+    // if (data && data.statusCode !== 200) {
+
+    // }
+
+    if (
+      data &&
+      (data.statusCode === 200 || data.statusCode === 220) &&
+      authCtx.dispatchUser &&
+      !error
+    ) {
       setUserSession(data.kanban_user);
       authCtx.dispatchUser(data.csrf);
-      setSubmitted(false);
     }
+    setSubmitted(false);
   }, [authCtx, data, error, submitted]);
   useEffect(() => {
-    if (authCtx.user && data && data.statusCode === 200) {
+    if (
+      authCtx.user &&
+      data &&
+      (data.statusCode === 200 || data.statusCode === 220)
+    ) {
       navigate('/kanban');
     }
   }, [authCtx, data, navigate, isFetching, error]);
