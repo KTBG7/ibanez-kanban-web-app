@@ -8,6 +8,7 @@ import { AuthContext } from '../../contexts/AuthContextProvider';
 import { Link, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { postUserLogout } from '../../utils/queryHelper';
+import { deleteUserSession } from '../../utils/userUtils';
 
 const BoardDropdown = () => {
   const context = useContext(UserContext);
@@ -61,11 +62,16 @@ const BoardDropdown = () => {
       alert('Error Logging out, please refresh and try again.');
     }
     if (data && data?.statusCode === 200 && authContext.dispatchUser) {
-      setLogout(false);
+      deleteUserSession();
       authContext.dispatchUser(null);
       navigate('/');
     }
   }, [data, error, navigate, authContext]);
+  useEffect(() => {
+    if (data && data.statusCode === 200) {
+      navigate('/');
+    }
+  }, [data, navigate]);
   return (
     <ul className="absolute top-14 right-0 w-[192px] text-typography-grey rounded-md bg-white border border-lines-light dark:border-lines-dark dark:bg-dark_grey_primary text-body_L">
       <li className="hover:bg-button-secondary_light_hover dark:hover:bg-button-secondary_dark dark:hover:text-button-secondary_text dark:text-white rounded-t-md">
