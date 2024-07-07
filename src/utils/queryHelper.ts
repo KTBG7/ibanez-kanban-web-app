@@ -9,6 +9,7 @@ export const userLogin = async (email: string, password: string) => {
     method: 'POST',
     credentials: 'same-origin',
     mode: 'same-origin',
+    referrer: 'https://api.ibanezkanban.com/',
     headers: {
       'Content-Type': 'application/json',
       kanban_user: userSession ? userSession : '',
