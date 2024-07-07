@@ -37,7 +37,8 @@ const Kanban = () => {
       deleteUserSession();
       navigate('/login');
     }
-    if (data && data.statusCode === 200 && !error) {
+    if (data && data.statusCode === 200 && !error && authCtx.dispatchUser) {
+      authCtx.dispatchUser(data.csrf);
       setBoardData(data.boards);
     }
   }, [authCtx, navigate, data, error]);
