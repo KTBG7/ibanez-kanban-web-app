@@ -49,6 +49,10 @@ const SignUp = () => {
     if (data && data.statusCode === 210) {
       deleteUserSession();
     }
+    if (data && data.statusCode === 230) {
+      deleteUserSession();
+      navigate('/login');
+    }
     if (
       data &&
       authCtx.dispatchUser &&
